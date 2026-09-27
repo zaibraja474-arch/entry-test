@@ -4,6 +4,9 @@ interface HeroProps {
   onSelectTrack: (track: string) => void;
   selectedTrack: string;
   onOpenMatchmaker: () => void;
+  onOpenDegreeQuiz: () => void;
+  onOpenDegrees: () => void;
+  onOpenArmedForces: () => void;
 }
 
 export function Hero({
@@ -12,6 +15,9 @@ export function Hero({
   onSelectTrack,
   selectedTrack,
   onOpenMatchmaker,
+  onOpenDegreeQuiz,
+  onOpenDegrees,
+  onOpenArmedForces,
 }: HeroProps) {
   const tracks = [
     { id: 'all', label: 'All Entry Tests' },
@@ -22,7 +28,7 @@ export function Hero({
   ];
 
   return (
-    <section className="relative overflow-hidden bg-slate-900 text-white pt-10 pb-16 lg:pt-16 lg:pb-20">
+    <section className="relative overflow-hidden bg-slate-900 text-white pt-8 pb-16 lg:pt-14 lg:pb-20">
       {/* Background visual asset with measured scrim for high WCAG contrast */}
       <div className="absolute inset-0 pointer-events-none">
         <img
@@ -35,22 +41,44 @@ export function Hero({
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* Main Proposition */}
-          <div className="lg:col-span-7 space-y-6">
-            <div className="flex items-center gap-2 text-xs font-semibold tracking-wider text-emerald-400">
+          <div className="lg:col-span-7 space-y-5">
+            <div className="flex flex-wrap items-center gap-2 text-xs font-semibold tracking-wider text-emerald-400">
               <span>Verified 2025-2026 Academic Directory</span>
               <span aria-hidden="true">·</span>
-              <span>Pakistan Admissions Authority</span>
+              <span>Pakistan Admissions & Armed Forces Commission</span>
             </div>
 
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight" style={{ textWrap: 'balance' }}>
-              Choose the Right Entry Test Academy in Pakistan with Transparent Facts.
+              Choose the Right Academy & Degree in Pakistan with Facts.
             </h1>
 
-            <p className="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl">
-              Compare genuine fee structures, course durations, test session frequency, and verified success rate statistics across KIPS, STEP, Stars, Anees Hussain, Nearpeer, and top regional institutes.
+            <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl">
+              Compare transparent fee structures, batch durations, and success statistics across <strong>KIPS, STEP, Stars, Anees Hussain, Nearpeer</strong>. Explore degrees in <strong>Aviation, Cybersecurity, Medicine, Engineering</strong>, and pass the <strong>PMA, PAF, Navy & ISSB</strong> Armed Forces selection.
             </p>
+
+            {/* Quick Action Badges */}
+            <div className="flex flex-wrap gap-2 pt-1">
+              <button
+                onClick={onOpenDegreeQuiz}
+                className="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-bold transition-colors cursor-pointer flex items-center gap-1.5 shadow-xs"
+              >
+                <span>🎯 Suggest My Degree (AI Quiz)</span>
+              </button>
+              <button
+                onClick={onOpenArmedForces}
+                className="px-3.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-emerald-300 border border-slate-700 rounded-lg text-xs font-semibold transition-colors cursor-pointer"
+              >
+                🎖️ Pak Army, PAF & Navy Tests
+              </button>
+              <button
+                onClick={onOpenDegrees}
+                className="px-3.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-lg text-xs font-semibold transition-colors cursor-pointer"
+              >
+                ✈️ Aviation, Cyber & All Degrees
+              </button>
+            </div>
 
             {/* Search and Action Bar */}
             <div className="space-y-3 pt-2">
@@ -75,12 +103,12 @@ export function Hero({
 
                 <button
                   onClick={onOpenMatchmaker}
-                  className="px-6 py-3 text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-500 rounded-lg transition-colors shadow-sm whitespace-nowrap cursor-pointer flex items-center justify-center gap-2"
+                  className="px-6 py-3 text-sm font-semibold text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg transition-colors shadow-sm whitespace-nowrap cursor-pointer flex items-center justify-center gap-2"
                 >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
-                  Resolve My Choice (Quiz)
+                  Match Academy
                 </button>
               </div>
 
@@ -106,15 +134,15 @@ export function Hero({
             {/* Trust and coverage indicators */}
             <div className="pt-2 flex flex-wrap items-center gap-6 text-xs text-slate-400 border-t border-slate-800/80">
               <div>
-                <span className="text-white font-bold font-mono tabular-nums text-sm">8+</span> Premier Networks Covered
+                <span className="text-white font-bold font-mono tabular-nums text-sm">8+</span> Top Academies
               </div>
               <span aria-hidden="true" className="text-slate-600">·</span>
               <div>
-                <span className="text-white font-bold font-mono tabular-nums text-sm">PKR 9,500 – 65,000</span> Complete Fee Transparency
+                <span className="text-white font-bold font-mono tabular-nums text-sm">17+</span> Degrees (Aviation/Cyber/AI)
               </div>
               <span aria-hidden="true" className="text-slate-600">·</span>
               <div>
-                <span className="text-white font-bold font-mono tabular-nums text-sm">18,500+</span> Annual Selections Tracked
+                <span className="text-white font-bold font-mono tabular-nums text-sm">5</span> Armed Forces Pathways
               </div>
             </div>
           </div>
@@ -122,7 +150,7 @@ export function Hero({
           {/* Quick Problem Resolver Callout Card */}
           <div className="lg:col-span-5 bg-slate-800/70 border border-slate-700/80 rounded-xl p-6 backdrop-blur-sm space-y-4">
             <div className="border-b border-slate-700/80 pb-3">
-              <h3 className="text-base font-semibold text-white">Stuck on Which Academy to Pick?</h3>
+              <h3 className="text-base font-semibold text-white">Stuck on Which Career or Academy to Pick?</h3>
               <p className="text-xs text-slate-300 mt-1">
                 Common dilemmas solved through genuine student performance data:
               </p>
@@ -134,7 +162,7 @@ export function Hero({
                   1
                 </div>
                 <div>
-                  <strong className="text-white">KIPS vs STEP:</strong> PGC students save PKR 14,000+ at STEP with exceptional mobile app videos, while KIPS offers unmatched publication book series.
+                  <strong className="text-white">Aviation vs Cybersecurity:</strong> BS Aviation Management at Air University offers fast airline operations placement, while Cybersecurity at FAST & NUST provides high-paying remote USD tech contracts.
                 </div>
               </div>
 
@@ -143,7 +171,7 @@ export function Hero({
                   2
                 </div>
                 <div>
-                  <strong className="text-white">Hostel vs Online:</strong> Living in Lahore/Rawalpindi adds PKR 30,000/month in hostel & mess costs. Nearpeer & TopGrade let outstation students save PKR 100k+.
+                  <strong className="text-white">Armed Forces (100% Free):</strong> PMA Kakul, PAF GDP, and Technical Cadet (TCC) pay full university tuition and monthly cadet stipends (PKR 30k-45k) with direct Officer commission.
                 </div>
               </div>
 
@@ -152,18 +180,24 @@ export function Hero({
                   3
                 </div>
                 <div>
-                  <strong className="text-white">AKU & IBA Specialization:</strong> General Punjab academies fail at AKU/IBA. Anees Hussain in Karachi produces 65%+ of AKU Medical College admissions.
+                  <strong className="text-white">KIPS vs STEP vs Online:</strong> STEP gives 30% discount to PGC alumni with video solutions for every MCQ; Nearpeer & TopGrade save PKR 100k+ in outstation hostel rent.
                 </div>
               </div>
             </div>
 
-            <div className="pt-2">
+            <div className="pt-2 flex flex-col sm:flex-row gap-2">
               <button
-                onClick={onOpenMatchmaker}
-                className="w-full py-2.5 px-4 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-xs font-semibold transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+                onClick={onOpenDegreeQuiz}
+                className="flex-1 py-2.5 px-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-bold transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-xs"
               >
-                <span>Take 2-Minute Academy Matchmaker</span>
+                <span>Take 6-Question Degree Quiz</span>
                 <span aria-hidden="true">&rarr;</span>
+              </button>
+              <button
+                onClick={onOpenArmedForces}
+                className="py-2.5 px-3 bg-slate-700 hover:bg-slate-600 text-slate-200 rounded-lg text-xs font-semibold transition-colors flex items-center justify-center cursor-pointer"
+              >
+                <span>Army/PAF Test Guide</span>
               </button>
             </div>
           </div>

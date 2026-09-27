@@ -1,5 +1,7 @@
+import { NavigationTab } from './Header';
+
 interface FooterProps {
-  onSelectTab: (tab: 'academies' | 'compare' | 'matchmaker' | 'calculator' | 'guides') => void;
+  onSelectTab: (tab: NavigationTab) => void;
 }
 
 export function Footer({ onSelectTab }: FooterProps) {
@@ -13,7 +15,7 @@ export function Footer({ onSelectTab }: FooterProps) {
               PakEntry<span className="text-emerald-500">.</span>
             </span>
             <p className="text-slate-400 text-xs leading-relaxed">
-              Pakistan’s unbiased entry test academies directory and comparison platform. Helping pre-medical and pre-engineering students make informed decisions with genuine fee and success statistics.
+              Pakistan’s unbiased entry test academies directory, degree intelligence, and armed forces commission preparation portal. Helping students choose the right degrees, academies, and career paths with transparent data.
             </p>
           </div>
 
@@ -33,18 +35,34 @@ export function Footer({ onSelectTab }: FooterProps) {
               </li>
               <li>
                 <button
-                  onClick={() => onSelectTab('compare')}
-                  className="hover:text-white transition-colors cursor-pointer"
+                  onClick={() => onSelectTab('degree-quiz')}
+                  className="hover:text-white transition-colors cursor-pointer text-emerald-400 font-semibold"
                 >
-                  Side-by-Side Comparison
+                  Degree Suggester Quiz
                 </button>
               </li>
               <li>
                 <button
-                  onClick={() => onSelectTab('matchmaker')}
+                  onClick={() => onSelectTab('degrees')}
                   className="hover:text-white transition-colors cursor-pointer"
                 >
-                  Decision Matchmaker
+                  All Degrees (Aviation, Cyber, AI)
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onSelectTab('armed-forces')}
+                  className="hover:text-white transition-colors cursor-pointer"
+                >
+                  Army, PAF, Navy & ISSB Guide
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onSelectTab('compare')}
+                  className="hover:text-white transition-colors cursor-pointer"
+                >
+                  Side-by-Side Comparison
                 </button>
               </li>
               <li>
@@ -55,49 +73,41 @@ export function Footer({ onSelectTab }: FooterProps) {
                   Fee & Scholarship Calculator
                 </button>
               </li>
-              <li>
-                <button
-                  onClick={() => onSelectTab('guides')}
-                  className="hover:text-white transition-colors cursor-pointer"
-                >
-                  Entry Test Guides & FAQs
-                </button>
-              </li>
             </ul>
           </div>
 
-          {/* Major Tests */}
+          {/* Featured Career Tracks */}
           <div className="space-y-2">
             <div className="font-semibold text-white uppercase tracking-wider text-[11px]">
-              Entry Tests
+              Featured Degrees & Tests
             </div>
             <ul className="space-y-1.5 text-slate-400">
-              <li>MDCAT & NUMS (PMDC Medical)</li>
-              <li>NUST NET Series 1, 2, 3, 4</li>
-              <li>ECAT (UET Lahore)</li>
-              <li>FAST-NU Computer Science</li>
-              <li>AKU Medical College & MMI</li>
-              <li>IBA Karachi & LUMS SAT</li>
+              <li>BS Aviation Management & Aerospace</li>
+              <li>BS Cyber Security & AI / Machine Learning</li>
+              <li>PMA Long Course & PAF GD Pilot</li>
+              <li>Army Technical Cadet Course (TCC)</li>
+              <li>Army Medical College (AMC NUMS)</li>
+              <li>MDCAT, NUST NET, ECAT & FAST-NU</li>
             </ul>
           </div>
 
           {/* Notice & Disclaimer */}
           <div className="space-y-2">
             <div className="font-semibold text-white uppercase tracking-wider text-[11px]">
-              Student Disclaimer
+              Student Advisory Notice
             </div>
             <p className="text-slate-500 text-[11px] leading-relaxed">
-              Fee structures, durations, and scholarship policies are aggregated from official institutional prospectuses and verified student reports for the 2025-2026 academic cycle. Always confirm directly at branch admission desks before remitting bank vouchers.
+              Eligibility criteria, age limitations, and physical standards for Pakistan Army, PAF, and Navy are in accordance with official Armed Forces Selection Centers (AS&RC / I&SC). Academic degree accreditations are verified via HEC, PEC, PMDC, and NCEAC.
             </p>
           </div>
         </div>
 
         <div className="pt-8 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-500 text-[11px]">
           <div>
-            &copy; {new Date().getFullYear()} PakEntry. All rights reserved. Built for Pakistani students.
+            &copy; {new Date().getFullYear()} PakEntry. All rights reserved. Dedicated to Pakistani students and aspirants.
           </div>
           <div className="flex items-center gap-4">
-            <span>Lahore · Islamabad · Karachi · Multan · Peshawar</span>
+            <span>Rawalpindi · Islamabad · Lahore · Karachi · Peshawar · Quetta</span>
           </div>
         </div>
       </div>

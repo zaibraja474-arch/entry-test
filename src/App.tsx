@@ -1,7 +1,8 @@
 import { useState, useMemo } from 'react';
 import { ACADEMIES_DATA } from './data/academies';
 import { Academy } from './types';
-import { Header } from './components/Header';
+import { DegreeInfo } from './typesDegrees';
+import { Header, NavigationTab } from './components/Header';
 import { Hero } from './components/Hero';
 import { AcademyCard } from './components/AcademyCard';
 import { ComparisonMatrix } from './components/ComparisonMatrix';
@@ -9,12 +10,15 @@ import { AcademyMatchmaker } from './components/AcademyMatchmaker';
 import { FeeScholarshipCalculator } from './components/FeeScholarshipCalculator';
 import { AcademyModal } from './components/AcademyModal';
 import { EntryTestGuide } from './components/EntryTestGuide';
+import { DegreeCatalog } from './components/DegreeCatalog';
+import { DegreeSuggesterQuiz } from './components/DegreeSuggesterQuiz';
+import { ArmedForcesGuide } from './components/ArmedForcesGuide';
 import { Footer } from './components/Footer';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<'academies' | 'compare' | 'matchmaker' | 'calculator' | 'guides'>('academies');
+  const [activeTab, setActiveTab] = useState<NavigationTab>('academies');
 
-  // Search & Filter state
+  // Search & Filter state for Academies
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTrack, setSelectedTrack] = useState('all');
   const [selectedMode, setSelectedMode] = useState<string>('all');
@@ -34,7 +38,6 @@ export default function App() {
         return prev.filter((id) => id !== academy.id);
       } else {
         if (prev.length >= 4) {
-          // If already 4, replace the last one
           return [...prev.slice(0, 3), academy.id];
         }
         return [...prev, academy.id];
@@ -71,7 +74,6 @@ export default function App() {
   // Filtered and sorted academies list
   const filteredAcademies = useMemo(() => {
     return ACADEMIES_DATA.filter((academy) => {
-      // Search text filter
       const matchesSearch =
         searchQuery === '' ||
         academy.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -79,17 +81,14 @@ export default function App() {
         academy.entryTestsCovered.some((t) => t.toLowerCase().includes(searchQuery.toLowerCase())) ||
         academy.branches.some((b) => b.city.toLowerCase().includes(searchQuery.toLowerCase()));
 
-      // Track filter
       const matchesTrack =
         selectedTrack === 'all' ||
         academy.entryTestsCovered.includes(selectedTrack as any);
 
-      // Delivery mode filter
       const matchesMode =
         selectedMode === 'all' ||
         academy.deliveryModes.some((m) => m.toLowerCase().includes(selectedMode.toLowerCase()));
 
-      // City filter
       const matchesCity =
         selectedCity === 'all' ||
         academy.branches.some((b) => b.city.toLowerCase().includes(selectedCity.toLowerCase())) ||
@@ -128,7 +127,7 @@ export default function App() {
 
       {/* Main Content Area */}
       <main className="flex-1 pb-24">
-        {/* HERO SECTION (Shown primarily on Academies tab or accessible anytime) */}
+        {/* HERO SECTION (Shown primarily on Academies tab) */}
         {activeTab === 'academies' && (
           <Hero
             searchQuery={searchQuery}
@@ -137,6 +136,18 @@ export default function App() {
             onSelectTrack={setSelectedTrack}
             onOpenMatchmaker={() => {
               setActiveTab('matchmaker');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            onOpenDegreeQuiz={() => {
+              setActiveTab('degree-quiz');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            onOpenDegrees={() => {
+              setActiveTab('degrees');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            onOpenArmedForces={() => {
+              setActiveTab('armed-forces');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
           />
@@ -292,7 +303,38 @@ export default function App() {
             </div>
           )}
 
-          {/* TAB 3: ACADEMY MATCHMAKER (DECISION WIZARD) */}
+          {/* TAB 3: DEGREE SUGGESTER QUIZ */}
+          {activeTab === 'degree-quiz' && (
+            <DegreeSuggesterQuiz
+              onSelectDegree={() => {
+                setActiveTab('degrees');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              onExploreDirectory={() => {
+                setActiveTab('degrees');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+            />
+          )}
+
+          {/* TAB 4: ALL DEGREES DIRECTORY (Aviation, Cyber, Medicine, etc.) */}
+          {activeTab === 'degrees' && (
+            <DegreeCatalog
+              onTakeQuiz={() => {
+                setActiveTab('degree-quiz');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              onExploreArmyTests={() => {
+                setActiveTab('armed-forces');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+            />
+          )}
+
+          {/* TAB 5: ARMED FORCES TESTS & COMMISSIONS (Army, PAF, Navy, ISSB) */}
+          {activeTab === 'armed-forces' && <ArmedForcesGuide />}
+
+          {/* TAB 6: ACADEMY MATCHMAKER (DECISION WIZARD) */}
           {activeTab === 'matchmaker' && (
             <AcademyMatchmaker
               academies={ACADEMIES_DATA}
@@ -301,7 +343,7 @@ export default function App() {
             />
           )}
 
-          {/* TAB 4: FEE & SCHOLARSHIP CALCULATOR */}
+          {/* TAB 7: FEE & SCHOLARSHIP CALCULATOR */}
           {activeTab === 'calculator' && (
             <FeeScholarshipCalculator
               academies={ACADEMIES_DATA}
@@ -310,7 +352,7 @@ export default function App() {
             />
           )}
 
-          {/* TAB 5: ENTRY TEST GUIDES & DILEMMAS */}
+          {/* TAB 8: ENTRY TEST GUIDES & DILEMMAS */}
           {activeTab === 'guides' && <EntryTestGuide />}
         </div>
       </main>
