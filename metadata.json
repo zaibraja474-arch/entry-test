@@ -1,0 +1,8 @@
+{
+  "name": "PakEntry - Pakistan Entry Test Academies Guide & Comparison Portal",
+  "description": "Comprehensive guide, side-by-side comparison, fee structures, course durations, and success statistics for top entry test academies in Pakistan (KIPS, STEP, Stars, Anees Hussain, Nearpeer, TopGrade, etc.).",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
